@@ -1,0 +1,28 @@
+package leetcode.longestHarmoniousSubsequence_594;
+
+import java.util.Arrays;
+
+public class LHSSlidingWindow {
+    private static int findLHS(int[] nums) {
+        Arrays.sort(nums);
+
+        int left = 0, maxLen = 0;
+
+        for (int right = 0; right < nums.length; right++) {
+
+            while (nums[right] - nums[left] > 1) {
+                left++;
+            }
+
+            if (nums[right] - nums[left] == 1) {
+                maxLen = Math.max(maxLen, right - left + 1);
+            }
+        }
+
+        return maxLen;
+    }
+    public static void main(String[] args) {
+        int[] nums = {1,3,2,2,5,2,3,7};
+        System.out.println(findLHS(nums));
+    }
+}
